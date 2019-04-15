@@ -509,8 +509,14 @@ endif
 # Needed for Semaphore CI (where disk space is a real issue during k8s-test)
 .PHONY: remove-build-images
 remove-build-images:
-	@echo "Removing build images ($(CALICO_BUILD), calico-build/bpf-clang, debian:buster-slim) to save space needed for testing ..."
-	@-docker system prune -f
+	@echo "Removing build images ($(CALICO_BUILD), debian:buster-slim) to save space needed for testing ..."
+	docker images
+	df -h
+	@-docker rmi $(CALICO_BUILD) debian:buster-slim
+	@echo "Build images removed"
+	docker images
+	docker ps
+	df -h
 
 .PHONY: st
 ## Run the system tests
