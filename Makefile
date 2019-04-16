@@ -471,6 +471,7 @@ k8s-test:
 	$(MAKE) k8s-start
 	$(MAKE) k8s-run-test
 	#$(MAKE) k8s-stop
+	df -h
 
 .PHONY: k8s-start
 ## Start k8s cluster
